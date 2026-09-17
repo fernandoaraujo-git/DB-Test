@@ -1,13 +1,13 @@
 const express = require('express');
 const cors = require('cors');
 const bcrypt = require('bcrypt');
+const path = require('path');
 const db = require('./db');
 
 const app = express();
 app.use(cors()); // Habilita o frontend 
 app.use(express.json());
-
-// CREATE - Cadastro com Hash
+app.use(express.static(path.join(__dirname, 'public')));// CREATE - Cadastro com Hash
 app.post('/usuarios', async (req, res) => {
     const { nome, email, senha } = req.body;
     if (!nome || !email || !senha) return res.status(400).json({ erro: 'Faltam dados 🚩' });
